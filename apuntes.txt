@@ -1,0 +1,47 @@
+
+url para select:
+https://www.youtube.com/watch?v=2BrHaiP10tU
+
+repositorio del proeycto select :
+https://github.com/urian121/select-dinamico-anidado-con-python-django/tree/master
+
+
+roles- tutorial bilivia:
+https://www.youtube.com/watch?v=pkotA0tvewQ
+
+------------------------------------------------
+
+activar el entorno : . env/bin/activate
+
+pip install -r requirements.txt
+
+para ver la version de mysql que tengo :
+pip list | grep mysql desde la termianl de code
+
+
+https://www.youtube.com/watch?v=Wv4SjIX8JIE&t=282s
+
+--------------------------------------------
+
+
+el sistema debe:
+- Listar los trabajadores 
+
+- crear un trabajador a travez de un formulario
+	- datos personales (nombre, rut, sexo, direccion y telefono)
+	- datos laborales (cargo , fecha de ingreso, area y deapartamento a la que la pertenece
+	- Contacto de emergencia (nombre, relacion con el trabajdor, telefono contacto)
+	- Cargas familiares (nombre, parentesco, sexo, rut)
+
+- login con usuario y pass, y verá el menú en base a su perfil ( un usuario solo debe tener un perfil)
+
+- el jefe RRHH puede ver lista de trabajadores filtro(sexo, cargo, area y dpto)
+
+- empleado de RRHH, solo listar a todos los trabajadores través de una tabla 
+- emeplado de RRHH, puede ingresar datos personales, laborales, contacto de emergencia y cargas familiares de los trabajadores (REGISTRAR NUEVO TRABAJADOR)
+- Empleado de RRHH, puede modificar la información de un trabajador existente.
+- empleado de RRHH, puede eliminar a un trabajador 
+- emplaedo de RRHH puede generar reportes
+
+- el trabajdor puede modificar: datos personales, cargas familiares, solicitar vacaciones (agregando o eliminando datos.)
+- el trabajador no puede modficar: rut, datos lavborales

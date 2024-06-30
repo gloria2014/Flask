@@ -1,0 +1,271 @@
+{% extends 'public/base_cpanel.html' %}
+<!--Cambiando el title-->
+{% block title %}Crud con Python 🐍 | Registrar Nuevo Empleado{% endblock %}
+<!---->
+{% block customCSS %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename ='assets/css/file.css') }}" />
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock %}
+
+<!--Inicio del block-->
+{% block body %}
+<div class="card" style="border-radius: 0px !important">
+  {% if respuestaEmpleado|length %}
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12">
+      <h3 class="text-center mt-5 mb-3">
+        {% if respuestaEmpleado.Rol == 2 %}
+        <a href="/lista-de-empleados">
+          <i class="bi bi-arrow-left-circle"></i>
+        </a>
+        {% endif %}
+        ACTUALIZAR INFROMACIÓN DEL EMPLEADO
+      </h3>
+
+      <hr />
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-10">
+      <form
+        class="form-horizontal mx-auto"
+        method="POST"
+        action="{{ url_for('actualizarEmpleado', id = respuestaEmpleado.Id_Trab ) }}"
+        autocomplete="off"
+        enctype="multipart/form-data">
+        <input
+          type="text"
+          class="form-control"
+          name="Id_Trab"
+          value="{{ respuestaEmpleado.Id_Trab }}"
+          required
+          hidden />
+<!-- DATOS PERSONALES -->
+<h5 class="text-center">DATOS PERSOONALES</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <label for="RUT" class="form-label">
+                  Rut
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="RUT"
+                  value="{{ respuestaEmpleado.RUT }}"
+                  readonly />
+              </div>
+              <div class="col-md-4">
+                <label for="email_user" class="form-label">
+                  Correo electrónico
+                </label>
+                <input
+                  type="email"
+                  name="email_user" value="{{respuestaEmpleado.email_user}}"
+                  class="form-control"
+                  readonly />
+              </div>
+              
+              <div class="col-md-4">
+                <label for="Sexo" class="form-label">
+                  Sexo del empleado
+                </label>
+                <input
+                  type="email"
+                  name="email_user" value="{{respuestaEmpleado.Sexo}}"
+                  class="form-control"
+                  readonly />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <label for="Nombre_Completo" class="form-label">
+                  Nombre completo
+                </label>
+                <input
+                  type="text"
+                  name="Nombre_Completo"
+                  value="{{ respuestaEmpleado.Nombre_Completo}}"
+                  class="form-control"
+                  readonly />
+              </div>
+
+              <div class="col-md-4">
+                <label for="telefono" class="form-label">
+                  Teléfono 
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="Telefono"
+                  name="Telefono" value="{{respuestaEmpleado.Telefono}}"
+                  readonly />
+              </div>
+            </div>
+            <div class="row">
+              
+              <div class="col-md-8">
+                <label for="direccion" class="form-label">
+                  Dirección
+                </label>
+                <input
+                  type="text"
+                  id="Direccion"
+                  name="Direccion" value="{{respuestaEmpleado.Direccion}}"
+                  class="form-control"
+                  readonly />
+              </div>
+
+
+              <!-- <div class="col-md-4">
+                <label for="region" class="form-label">
+                  Región
+                </label>
+                <select id="Id_Region" name="Id_Region" class="form-select" 
+                  onchange="filtrarComunas(this.value)">
+                  <option selected>Seleccione</option>
+                  {% for option in regiones %}
+                      <option value="{{ option.Id_Region}}">{{ option.Nombre }}</option>
+                  {% endfor %}
+                  </select>
+              </div> -->
+              <!-- <div class="col-md-4">
+                <label for="comuna" class="form-label">
+                  Comuna
+                </label>
+                <select id="Id_Comuna" name="comuna" class="form-select">
+                  <option value="">Seleccione</option>
+                  
+                  </select>
+              </div> -->
+            </div>
+          </div>
+
+          <!-- DATOS EMERNGENCIA-->
+          <h5 class="text-center">DATOS DE EMERNGENCIA</h5>
+          <div class="card-body">
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label for="nombreContacto" class="form-label">
+                  Nombre del contacto
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="Nombre_Contacto"
+                  name="Nombre_Contacto" value="{{respuestaEmpleado.Nombre_Contacto}}"
+                  required />
+                  <input type="hidden" name="Id_Contacto" value="{{respuestaEmpleado.Id_Contacto}}"/>
+              </div>
+              <div class="col-md-4">
+                <label for="relacionEmpleado" class="form-label">
+                  Relación con el empleado
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="Relacion"
+                  name="Relacion" value="{{ respuestaEmpleado.Relacion}}"
+                  required />
+              </div>
+              <div class="col-md-4">
+                <label for="telefonoContacto" class="form-label">
+                  Teléfono Contacto
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="Telefono_Contacto"
+                  name="Telefono_Contacto" value="{{respuestaEmpleado.Telefono_Contacto}}"
+                  required />
+              </div>
+            </div>
+          </div>
+
+          <!-- CARGAS FAMILIARES-->
+          <h5 class="text-center">CARGAS FAMILIARES</h5>
+          <div class="card-body">
+        
+            <div class="row mt-2">
+              <div class="col-md-6">
+                <label for="nombreCarga" class="form-label">
+                  Nombre completo
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="Nombre_Carga"
+                  name="Nombre_Carga" value="{{respuestaEmpleado.Nombre_Carga}}"
+                  required />
+                  <input type="hidden" name="Id_Carga" value="{{respuestaEmpleado.Id_Carga}}"/>
+              </div>                   
+              <div class="col-md-6">
+                <label for="RUT_Carga" class="form-label">
+                  Rut
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="RUT_Carga"
+                  name="RUT_Carga" value="{{respuestaEmpleado.RUT_Carga}}"
+                  required />
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6">
+                <label for="parentesco" class="form-label">
+                  Parentesco
+                </label>
+                <input
+                  class="form-control"
+                  type="text"                        
+                  name="Parentesco" value="{{respuestaEmpleado.Parentesco}}"
+                  required />
+              </div>
+              <div class="col-md-6">
+                <label for="SexoCarga" class="form-label">
+                  Sexo Carga familiar
+                </label>
+                {% with tipo_sexo = {"1": "Masculino", "2": "Femenino"} %}
+                <select class="form-select" name="SexoCarga">
+                  {% for clave, valor in tipo_sexo.items() %} {% if clave ==
+                  respuestaEmpleado.SexoCarga|string %}
+                  <option value="{{ clave }}" selected>{{ valor }}</option>
+                  {% else %}
+                  <option value="{{ clave }}">{{ valor }}</option>
+                  {% endif %} {% endfor %}
+                </select>
+                {% endwith %}
+              </div>
+            </div>
+          </div>
+
+        <div class="card-body">      
+
+          <div class="mb-3 mt-4 text-center">
+            <button type="submit" class="btn rounded-pill btn-primary">
+              Guardar registro ahora
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12">
+      <h3 class="text-center">Empleado aun no está registrado</h3>
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+{% endblock %} {% block customJS %}
+<script src="{{ url_for('static', filename ='assets/customJS/file.js') }}"></script>
+{% endblock %}

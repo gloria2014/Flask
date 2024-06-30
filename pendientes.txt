@@ -1,0 +1,21 @@
+ALTER TABLE trabajador DROP FOREIGN KEY  trabajadores_ibfk_6;
+
+ALTER TABLE trabajador DROP COLUMN Id_Sueldo;
+
+ALTER TABLE trabajador add Sueldo int not null
+
+ACA ME QUEDE FALTA TRAER LA INFO DEL FORMULARIO DE REGSITRO AL  FORMUALRIO ACTUALIZAR MIS DATOS 
+ACA VAIDAR LSOLO LO QUE LE TRABAJADOR PUEDE EDITAR
+
+
+  href="{{ url_for('viewEditarEmpleado', id = empleado.Id_Trab) }}"
+
+
+href="/mi-datos-personales"
+
+session['email_user']
+
+----------------------------------------------------------------
+
+ValueError: invalid literal for int() with base 10: 'Se produjo un error 
+ 1452 (23000): Cannot add or update a child row: a foreign key constraint fails
