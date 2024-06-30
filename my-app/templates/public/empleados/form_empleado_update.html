@@ -92,7 +92,7 @@
                   name="Nombre_Completo"
                   value="{{ respuestaEmpleado.Nombre_Completo}}"
                   class="form-control"
-                  readonly />
+                  required />
               </div>
 
               <div class="col-md-4">
@@ -104,7 +104,7 @@
                   type="text"
                   id="Telefono"
                   name="Telefono" value="{{respuestaEmpleado.Telefono}}"
-                  readonly />
+                  required />
               </div>
             </div>
             <div class="row">
@@ -118,7 +118,8 @@
                   id="Direccion"
                   name="Direccion" value="{{respuestaEmpleado.Direccion}}"
                   class="form-control"
-                  readonly />
+                  required />
+                  <input type="hidden" name="Id_TRab" value="{{respuestaEmpleado.Id_Trab}}" />
               </div>
 
 

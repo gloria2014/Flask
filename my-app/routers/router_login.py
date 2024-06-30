@@ -37,8 +37,8 @@ def cpanelRegisterUser():
     if 'conectado' in session:
         return redirect(url_for('inicio'))
     else: 
-       #return render_template(f'{PATH_URL_LOGIN}/auth_register.html')   # DESCOMENTAR ESTA .LINEA LIEGO DE CREAR AL PRIEMR USUARIO
-       return render_template(f'{PATH_URL_LOGIN}/auth_register_SoloUnaVez.html')
+       return render_template(f'{PATH_URL_LOGIN}/auth_register.html')   # DESCOMENTAR ESTA .LINEA LIEGO DE CREAR AL PRIEMR USUARIO
+       #return render_template(f'{PATH_URL_LOGIN}/auth_register_SoloUnaVez.html')
  
 
 
@@ -52,34 +52,6 @@ def cpanelRecoveryPassUser():
 
 
 # Crear cuenta de usuario  1- LUEGO DE CREAR PRIEMR USUARIO DESCOMENTAR ESTE METODO
-# @app.route('/saved-register', methods=['POST'])
-# def cpanelResgisterUserBD():  
-   
-#     if request.method == 'POST' and 'name_surname'in request.form and 'pass_user' in request.form:
-#         name_surname = request.form['name_surname']
-#         email_user = request.form['email_user']
-#         pass_user = request.form['pass_user']
-#         rol_user = request.form['Rol']  
-#         #rol_user = 2
-  
-#         # Primero valido que el usuario esté registrado en la tabla trabajador
-#         usuarioRegistrado = info_datos_personales(email_user)
-
-#         if usuarioRegistrado:
-#             resultData = recibeInsertRegisterUser(name_surname, email_user, pass_user, rol_user)
-#             if (resultData != 0):
-#                 flash('la cuenta fue creada correctamente.', 'success')
-#                 return redirect(url_for('inicio'))
-#             else:
-#                 flash('La cuenta de usuario no se creó. CONTACTE A RRHH', 'warning')
-#                 return redirect(url_for('inicio'))
-#         else:
-#             flash('No puede crear su cuenta. Primero debe estar registrado. CONTACTE A RRHH', 'error')
-#     else:
-#         flash('el método HTTP es incorrecto', 'error')
-#         return redirect(url_for('inicio'))
-
-# ESTE METODO SE EJECUTA SOLO LA PRIEMERA VEZ PARA CREAR AL USUSRIO CON ROL 2 LUEGO COMENTAR ESTE METODO
 @app.route('/saved-register', methods=['POST'])
 def cpanelResgisterUserBD():  
    
@@ -87,19 +59,47 @@ def cpanelResgisterUserBD():
         name_surname = request.form['name_surname']
         email_user = request.form['email_user']
         pass_user = request.form['pass_user']
-        
-        rol_user = 2
+        rol_user = request.form['Rol']  
+        #rol_user = 2
   
-        resultData = recibeInsertRegisterUser(name_surname, email_user, pass_user, rol_user)
-        if (resultData != 0):
+        # Primero valido que el usuario esté registrado en la tabla trabajador
+        usuarioRegistrado = info_datos_personales(email_user)
+
+        if usuarioRegistrado:
+            resultData = recibeInsertRegisterUser(name_surname, email_user, pass_user, rol_user)
+            if (resultData != 0):
                 flash('la cuenta fue creada correctamente.', 'success')
                 return redirect(url_for('inicio'))
-        else:
+            else:
                 flash('La cuenta de usuario no se creó. CONTACTE A RRHH', 'warning')
                 return redirect(url_for('inicio'))
+        else:
+            flash('No puede crear su cuenta. Primero debe estar registrado. CONTACTE A RRHH', 'error')
     else:
         flash('el método HTTP es incorrecto', 'error')
         return redirect(url_for('inicio'))
+
+# ESTE METODO SE EJECUTA SOLO LA PRIEMERA VEZ PARA CREAR AL USUSRIO CON ROL 2 LUEGO COMENTAR ESTE METODO
+# @app.route('/saved-register', methods=['POST'])
+# def cpanelResgisterUserBD():  
+   
+#     if request.method == 'POST' and 'name_surname'in request.form and 'pass_user' in request.form:
+#         name_surname = request.form['name_surname']
+#         email_user = request.form['email_user']
+#         pass_user = request.form['pass_user']
+        
+#         rol_user = 2
+  
+#         resultData = recibeInsertRegisterUser(name_surname, email_user, pass_user, rol_user)
+#         if (resultData != 0):
+#                 flash('la cuenta fue creada correctamente.', 'success')
+#                 return redirect(url_for('inicio'))
+#         else:
+#                 flash('La cuenta de usuario no se creó. CONTACTE A RRHH', 'warning')
+#                 return redirect(url_for('inicio'))
+#     else:
+#         flash('el método HTTP es incorrecto', 'error')
+#         return redirect(url_for('inicio'))
 
 
 # Actualizar datos de mi perfil

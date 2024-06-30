@@ -368,7 +368,12 @@ def procesar_actualizacion_form(data):
                 Nombre_Carga = data.form['Nombre_Carga'] 
                 RUT_Carga = data.form['RUT_Carga'] 
                 Parentesco = data.form['Parentesco']   
-                SexoCarga = data.form['SexoCarga']       
+                SexoCarga = data.form['SexoCarga'] 
+                Nombre_Completo = data.form['Nombre_Completo'] 
+                Telefono = data.form['Telefono']   
+                Direccion = data.form['Direccion'] 
+                Id_Trab = data.form['Id_Trab'] 
+
                 querySQL = """
                     UPDATE contacto_emergencia
                     SET 
@@ -391,6 +396,19 @@ def procesar_actualizacion_form(data):
                 """
                 values2 = (Nombre_Carga, Parentesco, SexoCarga, RUT_Carga, Id_Carga)
                 cursor.execute(querySQL2, values2)
+
+                querySQL3 = """
+                    UPDATE trabajador
+                    SET 
+                        Nombre_Completo = %s,
+                        Telefono = %s,
+                        Direccion = %s
+                    WHERE Id_Trab = %s
+                """
+                values3 = (Nombre_Completo, Telefono, Direccion, Id_Trab)
+                cursor.execute(querySQL3, values3)
+
+
                 conexion_MySQLdb.commit()
 
         return cursor.rowcount or []
@@ -411,7 +429,12 @@ def procesar_actualizacion_formTrabajador(data):
                 Nombre_Carga = data.form['Nombre_Carga'] 
                 RUT_Carga = data.form['RUT_Carga'] 
                 Parentesco = data.form['Parentesco']   
-                SexoCarga = data.form['SexoCarga']       
+                SexoCarga = data.form['SexoCarga'] 
+                Nombre_Completo = data.form['Nombre_Completo'] 
+                Telefono = data.form['Telefono']   
+                Direccion = data.form['Direccion'] 
+                Id_Trab = data.form['Id_Trab'] 
+                      
                 querySQL = """
                     UPDATE contacto_emergencia
                     SET 
@@ -434,6 +457,18 @@ def procesar_actualizacion_formTrabajador(data):
                 """
                 values2 = (Nombre_Carga, Parentesco, SexoCarga, RUT_Carga, Id_Carga)
                 cursor.execute(querySQL2, values2)
+
+                querySQL3 = """
+                    UPDATE trabajador
+                    SET 
+                        Nombre_Completo = %s,
+                        Telefono = %s,
+                        Direccion = %s
+                    WHERE Id_Trab = %s
+                """
+                values3 = (Nombre_Completo, Telefono, Direccion, Id_Trab)
+                cursor.execute(querySQL3, values3)
+
                 conexion_MySQLdb.commit()
 
         return cursor.rowcount or []
